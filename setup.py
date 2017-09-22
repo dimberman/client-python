@@ -16,8 +16,8 @@ from setuptools import find_packages, setup
 
 # Do not edit these constants. They will be updated automatically
 # by scripts/update-client.sh.
-CLIENT_VERSION = "3.0.0-snapshot"
-PACKAGE_NAME = "kubernetes"
+CLIENT_VERSION = "0.0.9"
+PACKAGE_NAME = "blp.dsbuild.kubernetes"
 DEVELOPMENT_STATUS = "4 - Beta"
 
 # To install the library, run the following
@@ -27,16 +27,43 @@ DEVELOPMENT_STATUS = "4 - Beta"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-with open('requirements.txt') as f:
-    REQUIRES = f.readlines()
+#with open('requirements.txt') as f:
+#    REQUIRES = f.readlines()
+REQUIRES = """
+certifi>=14.05.14 # MPL
+six>=1.9.0  # MIT
+python-dateutil>=2.5.3  # BSD
+setuptools>=21.0.0  # PSF/ZPL
+urllib3>=1.19.1,!=1.21  # MIT
+pyyaml>=3.12  # MIT
+google-auth>=1.0.1  # Apache-2.0
+ipaddress>=1.0.17  # PSF
+websocket-client>=0.32.0,<=0.40.0 # LGPLv2+
 
-with open('test-requirements.txt') as f:
-    TESTS_REQUIRES = f.readlines()
+"""
+
+#with open('test-requirements.txt') as f:
+#    TESTS_REQUIRES = f.readlines()
+TESTS_REQUIRES = """
+coverage>=4.0.3
+nose>=1.3.7
+pytest
+pluggy>=0.3.1
+py>=1.4.31
+randomize>=0.13
+mock>=2.0.0
+sphinx>=1.2.1,!=1.3b1,<1.4 # BSD
+recommonmark
+codecov>=1.4.0
+pep8
+autopep8
+isort
+"""
 
 setup(
     name=PACKAGE_NAME,
     version=CLIENT_VERSION,
-    description="Kubernetes python client",
+    description="Kubernetes python client - https://github.com/kubernetes-incubator/client-python/commit/bca588fbb3d40c56726d1ea1388b47b84b997538",
     author_email="",
     author="Kubernetes",
     license="Apache License Version 2.0",
@@ -44,10 +71,12 @@ setup(
     keywords=["Swagger", "OpenAPI", "Kubernetes"],
     install_requires=REQUIRES,
     tests_require=TESTS_REQUIRES,
-    packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
-              'kubernetes.watch', 'kubernetes.client.apis',
-              'kubernetes.client.models'],
+    #packages=find_packages(),
+    packages=['blp', 'blp.dsbuild', 'blp.dsbuild.kubernetes', 'blp.dsbuild.kubernetes.client', 'blp.dsbuild.kubernetes.config',
+              'blp.dsbuild.kubernetes.watch', 'blp.dsbuild.kubernetes.client.apis',
+              'blp.dsbuild.kubernetes.client.models'],
     include_package_data=True,
+    #data_files=['requirements.txt', 'test-requirements.txt'],
     long_description="""\
     Python client for kubernetes http://kubernetes.io/
     """,
